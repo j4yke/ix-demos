@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import 'tailwindcss';
+
+body {
+  background-color: var(--color-stone-50);
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+/* ─── Price Comparison Graph ──────────────────────────────────────────────── */
+
+.price-graph-root {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #fafaf9;
+  border-radius: 0;
+  overflow: hidden;
+}
+
+/* The main graph area — clips the panning SVG */
+.price-graph-content {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  /* border-bottom handled by parent */
+}
+
+/* The moving SVG track — fills content area from top */
+.price-graph-svg-track {
+  position: absolute;
+  top: 0;
+  left: 0;
+  will-change: transform;
+}
+
+/* Side fade overlays */
+.price-graph-fade {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 96px;
+  pointer-events: none;
+  z-index: 2;
+}
+.price-graph-fade--left {
+  left: 0;
+  background: linear-gradient(to right, #fafaf9 20%, transparent);
+}
+.price-graph-fade--right {
+  right: 0;
+  background: linear-gradient(to left, #fafaf9 20%, transparent);
+}
+
