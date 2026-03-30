@@ -1,5 +1,5 @@
-const imgTailAtomOut = "http://localhost:3845/assets/00fad20ed0b8225f9dfeeaeac95522a064c55a63.svg";
-const imgDoubleCheck = "http://localhost:3845/assets/19be400d4f51c88ea2d37dfce5b97d2a1f4c7b44.svg";
+const imgTailAtomOut = "/chat/tail-out.svg";
+const imgDoubleCheck = "/chat/double-check.svg";
 
 interface MessageSentProps {
   message: string;

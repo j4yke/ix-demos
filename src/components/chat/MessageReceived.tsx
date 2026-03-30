@@ -1,4 +1,4 @@
-const imgTailIn = "http://localhost:3845/assets/623b5a528123e4cd2dcf6e7e1e9526e2ebf83590.svg";
+const imgTailIn = "/chat/tail-in.svg";
 
 interface MessageReceivedProps {
   message: string;
