@@ -27,18 +27,33 @@ export default function ChatDemoPage() {
   useEffect(() => {
     if (visibleMessages < CONVERSATION.length) {
       const nextMessage = CONVERSATION[visibleMessages];
-      const initialDelay = 1000;
+      
+      // Calculate a realistic delay based on message length
+      // For sent messages, this simulates the user "composing" their message
+      // For received messages, this is the pause before the agent starts typing
+      const messageLengthFactor = nextMessage.message.length * 10;
+      let initialDelay = nextMessage.type === "sent" 
+        ? Math.min(Math.max(1500 + messageLengthFactor, 2000), 4000) // Longer for user messages
+        : 1000; // Shorter pause before agent starts typing
+
+      // Make the very first message appear almost instantly for better engagement
+      if (visibleMessages === 0) {
+        initialDelay = 400;
+      }
 
       const timer = setTimeout(() => {
         if (nextMessage.type === "received") {
           setIsTyping(true);
-          // Agent "typing" for 1 second
+          
+          // Realistic typing duration based on message length
+          const typingDuration = Math.min(Math.max(nextMessage.message.length * 15, 1200), 3000);
+          
           setTimeout(() => {
             setIsTyping(false);
             setVisibleMessages((prev) => prev + 1);
-          }, 1000);
+          }, typingDuration);
         } else {
-          // User "sends" immediately after natural delay
+          // User "sends" after simulated thinking/typing time
           setVisibleMessages((prev) => prev + 1);
         }
       }, initialDelay);
@@ -63,7 +78,7 @@ export default function ChatDemoPage() {
           <div className="w-full h-full flex gap-px overflow-hidden bg-white">
             
             {/* Left Side */}
-            <div className="bg-[#fafaf9] flex flex-[1_0_0] flex-col items-start justify-between p-[24px] relative">
+            <div className="bg-[#fafaf9] w-1/2 flex flex-col items-start justify-between p-[24px] relative">
               {/* Header / Logo */}
               <div className="relative shrink-0 w-[220px] h-[50px] -ml-2 -mt-2">
                 <Image
@@ -101,7 +116,7 @@ export default function ChatDemoPage() {
             </div>
 
             {/* Right Side */}
-            <div className="flex-[1_0_0] h-full min-h-px min-w-px overflow-clip relative">
+            <div className="w-1/2 h-full min-h-px min-w-px overflow-clip relative">
               {/* Background Image */}
               <div className="absolute inset-0 z-0 bg-[#f5f5f4]">
                 <Image
