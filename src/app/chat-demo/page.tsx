@@ -134,10 +134,10 @@ export default function ChatDemoPage() {
                 {/* Chat Header */}
                 <div className="w-full shrink-0 flex justify-center px-2 pt-0 pb-2">
                   <Image
-                    src="/chat-header.png"
+                    src="/Header.png"
                     alt="Chat Header"
                     width={348}
-                    height={64}
+                    height={80}
                     className="w-full h-auto object-contain"
                     priority
                   />
